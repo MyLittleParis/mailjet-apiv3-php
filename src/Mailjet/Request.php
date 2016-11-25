@@ -43,12 +43,13 @@ class Request extends GuzzleClient
      * @param array  $body    Mailjet resource body
      * @param string $type    Request Content-type
      */
-    public function __construct($auth, $method, $url, $filters, $body, $type)
+    public function __construct($auth, $method, $url, $filters, $body, $type, $timeout = 0)
     {
         parent::__construct(['defaults' => [
             'headers' => [
                 'user-agent' => Config::USER_AGENT . phpversion() . '/' . Client::WRAPPER_VERSION
-            ]
+            ],
+            'timeout'         => $timeout,
         ]]);
         $this->type = $type;
         $this->auth = $auth;

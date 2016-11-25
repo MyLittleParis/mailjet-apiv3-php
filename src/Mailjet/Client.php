@@ -53,7 +53,7 @@ class Client
      * @param array  $args     Request arguments
      * @return Response server response
      */
-    private function _call($method, $resource, $action, $args)
+    private function _call($method, $resource, $action, $args, $timeout = 0)
     {
         $args = array_merge(
             [
@@ -76,7 +76,8 @@ class Client
             $url,
             $args['filters'],
             $args['body'],
-            $contentType
+            $contentType,
+            $timeout
         ))->call($this->call);
     }
 
@@ -97,9 +98,9 @@ class Client
      * @param array $args     Request arguments
      * @return Response
      */
-    public function post($resource, $args = [])
+    public function post($resource, $args = [], $timeout = 10)
     {
-        return $this->_call('POST', $resource[0], $resource[1], $args);
+        return $this->_call('POST', $resource[0], $resource[1], $args, $timeout);
     }
 
     /**
@@ -108,9 +109,9 @@ class Client
      * @param array $args     Request arguments
      * @return Response
      */
-    public function get($resource, $args = [])
+    public function get($resource, $args = [], $timeout = 10)
     {
-        return $this->_call('GET', $resource[0], $resource[1], $args);
+        return $this->_call('GET', $resource[0], $resource[1], $args, $timeout);
     }
 
     /**
@@ -119,9 +120,9 @@ class Client
      * @param array $args     Request arguments
      * @return Response
      */
-    public function put($resource, $args = [])
+    public function put($resource, $args = [], $timeout = 10)
     {
-        return $this->_call('PUT', $resource[0], $resource[1], $args);
+        return $this->_call('PUT', $resource[0], $resource[1], $args, $timeout);
     }
 
     /**
@@ -130,9 +131,9 @@ class Client
      * @param array $args     Request arguments
      * @return Response
      */
-    public function delete($resource, $args = [])
+    public function delete($resource, $args = [], $timeout = 10)
     {
-        return $this->_call('DELETE', $resource[0], $resource[1], $args);
+        return $this->_call('DELETE', $resource[0], $resource[1], $args, $timeout);
     }
 
     /**
